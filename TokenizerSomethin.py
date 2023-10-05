@@ -14,10 +14,11 @@ reserve = ["class", "constructor", "method", "function", "int", "boolean", "char
 
 #list to store different tokens for each line
 smolTemp = []
+#stores number of double quotes
 tempNumer = 0
 #stores the file into a list
 tempTok =[] 
-tempTok = file1.readlines()
+tempTok = file2.readlines()
 
 #for each element in the list (Line)
 for x in tempTok:
@@ -25,6 +26,7 @@ for x in tempTok:
     #splitting each line into tokens
     smolTemp = filter(None, re.split(r'\s|([^\w@#/*?])', x))
     #for i in smolTemp:
+    #will store stringConstants
     tempWord = ""
     #each token
     for i in smolTemp:
@@ -37,8 +39,7 @@ for x in tempTok:
                     break
                 else:
                     print("<comment> " + "*/" + " </comment>")
-                    break
-                
+                    break           
             if i in symbols:
                 print("<symbol> " + i + " </symbol>")
             elif i in specialSymbol:
@@ -54,20 +55,23 @@ for x in tempTok:
                     print("<symbol> " + "&amp;" + " </symbol>")
             elif i in reserve:
                 print("<keyword> " + i + " </keyword>")
+            #numberConstants
             elif i.isdigit():
                 if(int(i) >= 0):
                     print("<integerConstant " + i + " </integerConstant>") 
             else:
                 print("<identifier> " + i + " </identifier>")
+        #if currently inside of double quotes
         else:
             if(i == "\""):
                 tempNumer += 1
+                #build the String constants
                 print("<stringConstant " + tempWord + " </stringConstant>")
                 print("<symbol> " + "&quot;" + " </symbol>")
             tempWord = tempWord + " " + i
+            #next iteration
             continue
-          
-    
+           
 #Closing files
 file1.close()
 file2.close()
