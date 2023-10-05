@@ -10,12 +10,11 @@ comments = ["//", "/*", "/**", "*/", "**/"]
 symbols = ["(", ")", "[", "]", "{", "}", ",", ";", "=", ".", "+", "-", "*", "/", "|", "~"]
 specialSymbol = ["<", ">", "\"", "&"]
 markup = ["&lt;", "&gt;", "&quot;", "&amp;"]
-reserve = ["class", "constructor", "method", "function", "int", "string", "boolean", "char", "Array", "void", "var", "static", "field", "let", "do", "if", "else", "while", "return", "true", "false", "null", "this", "main"]
+reserve = ["class", "constructor", "method", "function", "int", "boolean", "char", "void", "var", "static", "field", "let", "do", "if", "else", "while", "return", "true", "false", "null", "this"]
 
 #list to store different tokens for each line
 smolTemp = []
 tester = []
-
 
 #stores the file into a list
 tempTok =[] 
@@ -26,7 +25,7 @@ for x in tempTok:
     print(x)
     #splitting each line into tokens
     #smolTemp = x.split()
-    smolTemp = filter(None, re.split(r'\s|([^\w@#/*])', x))
+    smolTemp = filter(None, re.split(r'\s|([^\w@#/*"?])', x))
     #for i in smolTemp:
     #    print(i)
     
@@ -35,19 +34,21 @@ for x in tempTok:
         #What class does the token belong to?
         if i in comments:
             print("<comment> " + i + " </comment>")
-        if i in symbols:
+        elif i in symbols:
             print("<symbol> " + i + " </symbol>")
-        if i in specialSymbol:
+        elif i in specialSymbol:
             if i == "<":
                 print("<symbol> " + "&lt;" + " </symbol>")
-            if i == ">":
+            elif i == ">":
                 print("<symbol> " + "&gt;" + " </symbol>")
-            if i == "\"":
+            elif i == "\"":
                 print("<symbol> " + "&quot;" + " </symbol>")
-            if i == "&":
+            elif i == "&":
                 print("<symbol> " + "&amp;" + " </symbol>")
-        if i in reserve:
+        elif i in reserve:
             print("<keyword>" + i + "</keyword>")
+        else:
+            print("<idenifier>" + i + "</identifier>")
     
     
     #for i in x:
