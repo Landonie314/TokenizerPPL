@@ -12,6 +12,7 @@ reserve = ["class", "constructor", "method", "funtion", "int", "boolean", "char"
 
 #list to store different tokens for each line
 smolTemp = []
+tester = []
 
 
 #stores the file into a list
@@ -20,10 +21,14 @@ tempTok = file1.readlines()
 
 #for each element in the list (Line)
 for x in tempTok:
+    print(x)
     #splitting each line into tokens
     smolTemp = x.split()
-    #each token
     for i in smolTemp:
+        print(i)
+    
+    #each token
+    """ for i in smolTemp:
         #What class does the token belong to?
         if i in comments:
             print("<comment> " + i + " </comment>")
@@ -39,15 +44,18 @@ for x in tempTok:
             if i == "&":
                 print("<symbol> " + "&amp;" + " </symbol>")
         if i in reserve:
-            print("<keyword>" + i + "</keyword>")
+            print("<keyword>" + i + "</keyword>") """
     
     
     #for i in x:
     #   print(i)
 
-for i in smolTemp:
-    print(i)
-   
+
+for x in smolTemp:
+    tester = x.split(";")
+    for i in tester:
+        print(i)
+
     
 
 
