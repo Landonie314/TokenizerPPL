@@ -1,14 +1,16 @@
 #Landon Jones_10/04/2023_PPL_Tokenizer
 #Opening the jack files we need to read from
+import re
+re.compile('<title>(.*)</title>')
 file1 = open("Main.jack", "r")
 file2 = open("SquareGame.jack", "r")
 
 #Token Classes
 comments = ["//", "/*", "/**", "*/", "**/"]
-symbols = ["(", ")", "[", "]", "{", "}", ",", ";", "=", ".", "+", "-", "*", "/", "&", "|", "~", "<", ">"]
+symbols = ["(", ")", "[", "]", "{", "}", ",", ";", "=", ".", "+", "-", "*", "/", "|", "~"]
 specialSymbol = ["<", ">", "\"", "&"]
 markup = ["&lt;", "&gt;", "&quot;", "&amp;"]
-reserve = ["class", "constructor", "method", "funtion", "int", "boolean", "char", "void", "var", "static", "field", "let", "do", "if", "else", "while", "return", "true", "false", "null", "this", "main"]
+reserve = ["class", "constructor", "method", "function", "int", "string", "boolean", "char", "Array", "void", "var", "static", "field", "let", "do", "if", "else", "while", "return", "true", "false", "null", "this", "main"]
 
 #list to store different tokens for each line
 smolTemp = []
@@ -23,12 +25,13 @@ tempTok = file1.readlines()
 for x in tempTok:
     print(x)
     #splitting each line into tokens
-    smolTemp = x.split()
-    for i in smolTemp:
-        print(i)
+    #smolTemp = x.split()
+    smolTemp = filter(None, re.split(r'\s|([^\w@#/*])', x))
+    #for i in smolTemp:
+    #    print(i)
     
     #each token
-    """ for i in smolTemp:
+    for i in smolTemp:
         #What class does the token belong to?
         if i in comments:
             print("<comment> " + i + " </comment>")
@@ -44,7 +47,7 @@ for x in tempTok:
             if i == "&":
                 print("<symbol> " + "&amp;" + " </symbol>")
         if i in reserve:
-            print("<keyword>" + i + "</keyword>") """
+            print("<keyword>" + i + "</keyword>")
     
     
     #for i in x:
